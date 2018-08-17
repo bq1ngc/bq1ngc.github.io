@@ -3,8 +3,34 @@
 <head>
 <meta charset="utf-8">
 <title>愿陪你度过幸福的余生</title>
-<audio src="music/Demo.mp3" autoplay="true" loop="loop"></audio>
-<link type="text/css" rel="stylesheet" href="style.css">
+<audio id="musicid" autoplay="autoplay" loop="true" >
+  <source src="http://home.bqingc.win:8888/audio/Demo.mp3" type="audio/mp3" />
+</audio>
+<script>
+    // 音乐播放
+function autoPlayMusic() {
+    // 自动播放音乐效果，解决微信自动播放问题
+    function musicInWeixinHandler() {
+        musicPlay(true);
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            musicPlay(true);
+        }, false);
+        document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+    }
+    document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+}
+function musicPlay(isPlay) {
+    var audio = document.getElementById('musicid');
+    if (isPlay && audio.paused) {
+        audio.play();
+    }
+    if (!isPlay && !audio.paused) {
+        audio.pause();
+    }
+}
+autoPlayMusic();
+</script>
+  <link type="text/css" rel="stylesheet" href="style.css">
 <div id="container">
   愿我的小公主
   <div id="flip">
